@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=UTF-8><title>Feapp-Dev</title><script>var globalData = {
+        userInfo: {
+            username: '{{userInfo.username}}',
+            role: '{{userInfo.role}}',
+            roleName: '{{userInfo.roleName}}'
+        },
+        nodeEnv: '{{nodeEnv}}'
+    };
+    //username模板标签未被解析时，请求从webpack-dev而来，
+    //需要重定向到后台，判断用户是否登录
+    //如果未登录，后台重定向到登录页面
+    //如果已登录，后台会携带用户信息，重新渲染此页面
+    if (/^\{\{nodeEnv\}\}$/.test(globalData.nodeEnv)) {
+        location.href = '/dev/index';
+    }</script><link href=/dist/css/app.4d7d405d.css rel=stylesheet></head><body><div id=app></div>{{if nodeEnv === 'dev'}}<script type=text/javascript src=/app.js></script>{{/if}}<script type=text/javascript src=/dist/js/manifest.5910ac09.js></script><script type=text/javascript src=/dist/js/vendor.4b5f4de3.js></script><script type=text/javascript src=/dist/js/app.795300c6.js></script></body></html>

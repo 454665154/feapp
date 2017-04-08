@@ -1,0 +1,15 @@
+1、Window下MongoDB安装：
+    http://jingyan.baidu.com/article/d5c4b52bef7268da560dc5f8.html
+2、Linux下MongoDB安装:
+    (1)yum官方安装：
+        https://docs.mongodb.com/manual/tutorial/install-mongodb-on-linux/
+    (2)MongoDb后台deamon方式启动：
+        http://chenzhou123520.iteye.com/blog/1634676
+    (3)MongoDB数据库启动与停止：
+        http://flyeagle.iteye.com/blog/1584774
+    (4)MongoDB数据库设置用户名及密码：
+        http://blog.csdn.net/wycf1314/article/details/10225921
+    (5)Linux下根据端口号杀死进程：
+        https://zhidao.baidu.com/question/748566541881044772.html?fr=iks&word=%C9%B1%CB%C0%B6%CB%BF%DA%BD%F8%B3%CC+linux&ie=gbk
+3、Window下Robomongo安装(MongoDB的GUI工具)
+    https://robomongo.org/

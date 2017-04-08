@@ -1,0 +1,15 @@
+{
+    "apps": [{
+        "name": "feapp",
+        "max_memory_restart": "300M",
+        "script": "./bin/www",
+        "error_file": "./logs/pm2/err.log",
+        "out_file": "./logs/pm2/out.log",
+        "pid_file": "./logs/pm2/pid.log",
+        "instances": 1,
+        "exec_mode": "fork",
+        "env": {
+            "NODE_ENV": "prd"
+        }
+    }]
+}

@@ -1,0 +1,70 @@
+二、API方法命名规范，以User为例，
+    (1)查询，以get打头
+        function getUserById(userId){}//获取单个用户
+        function getAllUserList(){}//获取所有的用户集合
+        function getUserListByCriteria(criteria){}//根据查询条件获取用户集合
+    (2)操作类，增删改查
+        createUser(){}//创建用户
+        updateUser(){}//更新用户
+        deleteUser(){}//删除用户
+        xxxUser(){}//第一个xxx是操作
+        xxxUserByxxx(){}//带有条件的操作
+三、controller编码规范
+    (1)方法添加注释
+    (2)方法必须使用try...catch
+    (3)异常时需打印日志，格式：logger.error(req.url,"描述",error)
+    例如：
+    /**
+     * 根据应用的SVN目录获取项目列表
+     */
+    exports.getProjectListByAppPath = async(function*(req, res) {
+        try {
+            const tagPath = req.query.tagPath;
+            const svnChildDirList = yield getSvnChildDirList(tagPath);
+            let projectList = svnChildDirList.map(function(item) {
+                return { name: item.name };
+            });
+            res.send(msg.genSuccessMsg('读取项目列表成功', projectList));
+        } catch (error) {
+            logger.error(req.url, '读取项目列表失败', error);
+            res.send(msg.genFailedMsg('读取项目列表失败'));
+        }
+    });
+四、model编码规范
+    (1)定义schema时需要根据实际情况添加校验规则
+    (2)默认保存方法可以挂载到实例方法上
+    (3)查询类的方法需要挂载到静态方法上
+    例如：
+    const tagLogSchema = new Schema({
+        app: { type: Schema.Types.ObjectId, ref: 'appModel' },
+        projectName: { type: String, required: true },
+        tagName: { type: String, required: true }
+    });
+    tagLogSchema.methods = {
+        updateAndSave: function() {
+            return this.save();
+        }
+    };
+    tagLogSchema.statics = {
+        getTagLogListByCriteria: function(options) {}
+    };
+五、关于system-param的使用
+    (1)列表查询判断类可使用param，例如：
+        //格式化操作类型
+        formatOperateType: function(row, column) {
+            return systemParam.tagLogOperateType.param[row.operateType];
+        }
+    (2)参数下拉列表可使用param，可使用v-for遍历参数对象，例如：
+        <el-select v-model="searchForm.operateType" placeholder="请选择操作类型">
+            <el-option v-for="(label, value) in searchForm.tagOperateTypeParam" :label="label" :value="value"></el-option>
+        </el-select>
+    (3)判断参数或设置参数时可使用contant，例如：
+        tagLog.operateType = systemParam.tagLogOperateType.constant.CREATE;
+六、前端报错提示
+    (1)操作类，成功或失败全部提示
+    (2)查询类，失败时提示
+七、大规范
+    (1)前后端请使用es6语法(请使用const|let代替var)
+    (2)模块引入规范：先引入外部模块，再引入内部文件
+
+
